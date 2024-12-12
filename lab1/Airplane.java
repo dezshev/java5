@@ -1,10 +1,10 @@
 package com.airport;
 
 public abstract class Airplane {
-    public String name;          // Название самолета
-    public String flightName;    // Рейс
-    public int passengerCount;   // Количество пассажиров
-    public double fuelAmount;     // Количество топлива
+    private String name;          // Название самолета
+    private String flightName;    // Рейс
+    private int passengerCount;   // Количество пассажиров
+    private double fuelAmount;    // Количество топлива
 
     public Airplane(String name, String flightName, int passengerCount, double fuelAmount) {
         this.name = name;
@@ -14,7 +14,7 @@ public abstract class Airplane {
     }
 
     public double calculateFuelConsumption() {
-        return fuelAmount / passengerCount;
+        return passengerCount > 0 ? fuelAmount / passengerCount : 0;
     }
 
     public int getPassengerCount() {
@@ -25,8 +25,16 @@ public abstract class Airplane {
         return name;
     }
 
+    public String getFlightName() {
+        return flightName;
+    }
+
+    public double getFuelAmount() {
+        return fuelAmount;
+    }
+
     public String getAirplaneInfo() {
-        return "Название: " + name + ", Рейс: " + flightName + ", Пассажиры: " + passengerCount +
-                ", Расход топлива: " + calculateFuelConsumption() + " литров на пассажира";
+        return String.format("Название: %s, Рейс: %s, Пассажиры: %d, Расход топлива: %.2f литров на пассажира",
+                name, flightName, passengerCount, calculateFuelConsumption());
     }
 }
